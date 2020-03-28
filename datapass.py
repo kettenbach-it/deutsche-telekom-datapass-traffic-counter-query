@@ -12,6 +12,6 @@ response = requests.get(url, headers=headers)
 js = response.json()
 
 print("Datennutzung: " + js["usedVolumeStr"] + "/" + js["initialVolumeStr"] + " => " +
-      str(js["usedPercentage"]) + "%. Restlaufzeit: " + js["remainingTimeStr"])
+      str(js["usedPercentage"]) + "%. Restlaufzeit: " + js["remainingTimeStr"] + " - Tarif: " + js["passName"])
 if js["hasOffers"]:
     print("Ein Angebot liegt vor!")
