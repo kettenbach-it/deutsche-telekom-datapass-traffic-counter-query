@@ -1,18 +1,17 @@
 #!/usr/bin/env python3
 import requests
 import urllib.request
-import time
-from bs4 import BeautifulSoup
 
-url = "http://datapass.de/home?continue=true"
-response = requests.get(url)
+url = "http://datapass.de/api/service/generic/v1/status"
 
-soup = BeautifulSoup(response.content, 'html.parser')
+headers = {
+    'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36",
 
-data = soup.find("div", class_="barTextBelow").text
-billingPeriod = soup.find("td", class_="infoValue billingPeriod").text
-remainingTime = soup.find("td", class_="infoValue remainingTime").text
+}
+response = requests.get(url, headers=headers)
+js = response.json()
 
-print("Abrechnungsmonat: " + billingPeriod)
-print(data)
-print("Restzeit: " + remainingTime)
+print("Datennutzung: " + js["usedVolumeStr"] + "/" + js["initialVolumeStr"] + " => " +
+      str(js["usedPercentage"]) + "%. Restlaufzeit: " + js["remainingTimeStr"])
+if js["hasOffers"]:
+    print("Ein Angebot liegt vor!")
