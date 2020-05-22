@@ -11,7 +11,25 @@ headers = {
 response = requests.get(url, headers=headers)
 js = response.json()
 
-print("Datennutzung: " + js["usedVolumeStr"] + "/" + js["initialVolumeStr"] + " => " +
-      str(js["usedPercentage"]) + "%. Restlaufzeit: " + js["remainingTimeStr"] + " - Tarif: " + js["passName"])
-if js["hasOffers"]:
-    print("Ein Angebot liegt vor!")
+#print(js)
+
+print(js["title"] + ": ")
+if "usedPercentage" in js:
+    if js["usedPercentage"] == 100:
+        print("Inkludiertes Datenvolumen mit hoher Geschwindigkeit verbraucht")
+        print("Verbleibende Zeit: " + js["remainingTimeStr"])
+        print("Subscriptions: " + str(js["subscriptions"]))
+
+    else:
+        print("Tarif: " + js["passName"])
+        print("Datenvolumen: " + js["initialVolumeStr"])
+        print("Verbraucht: " + js["usedVolumeStr"] + " (" + str(js["usedPercentage"]) + "%)")
+
+
+# if "usedVolumeStr" in js:
+#     print(js["usedVolumeStr"])
+#
+#     print(js["usedVolumeStr"] + "/" + js["initialVolumeStr"] + " => " +
+#           str(js["usedPercentage"]) + "%. Restlaufzeit: " + js["remainingTimeStr"] + " - Tarif: " + js["passName"])
+#     if js["hasOffers"]:
+#         print("Ein Angebot liegt vor!")
