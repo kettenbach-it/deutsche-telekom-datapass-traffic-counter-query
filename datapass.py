@@ -16,14 +16,14 @@ js = response.json()
 print(js["title"] + ": ")
 if "usedPercentage" in js:
     if js["usedPercentage"] == 100:
-        print("Inkludiertes Datenvolumen mit hoher Geschwindigkeit verbraucht")
-        print("Verbleibende Zeit: " + js["remainingTimeStr"])
-        print("Subscriptions: " + str(js["subscriptions"]))
+        print("\tInkludiertes Datenvolumen mit hoher Geschwindigkeit verbraucht")
+        print("\tVerbleibende Zeit: " + js["remainingTimeStr"])
+        print("\tSubscriptions: " + str(js["subscriptions"]))
 
     else:
-        print("Tarif: " + js["passName"])
-        print("Datenvolumen: " + js["initialVolumeStr"])
-        print("Verbraucht: " + js["usedVolumeStr"] + " (" + str(js["usedPercentage"]) + "%)")
+        print("\tTarif: " + js["passName"])
+        print("\tDatenvolumen: " + js["initialVolumeStr"])
+        print("\tVerbraucht: " + js["usedVolumeStr"] + " (" + str(js["usedPercentage"]) + "%)")
 
 
 # if "usedVolumeStr" in js:
